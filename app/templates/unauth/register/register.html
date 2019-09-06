@@ -1,0 +1,35 @@
+{% from "_formhelpers.html" import render_field %}
+{% extends 'unauth/base.html' %}
+
+{% block head %}
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Register</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" media="screen" href="static/register/register.css" />
+{% endblock %}
+
+{% block body %}
+{%if failed_registration%}
+<div class="alert alert-danger alert-dismissible fade show in" role="alert">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+</div>
+{%endif%}
+<div class="background">
+  <div class="col-sm">
+  </div>
+  <div class="col-sm">
+    <form method=post class="content">
+      <dl>
+        {{ render_field(form.username) }}
+      </dl>
+      <p><input type=submit value=Register class="btn">
+    </form>
+  </div>
+  <div class="col-sm">
+  </div>
+</div>
+{% endblock %}

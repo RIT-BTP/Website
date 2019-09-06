@@ -1,0 +1,108 @@
+body {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-image: url(../saunders.jpg);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+}
+
+.background {
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  overflow-y: auto;
+  height: 100;
+}
+
+#users {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: separate;
+    border-radius: 2rem;
+    width: 100%;
+  }
+  
+#users td, #users th {
+    /* border: 1px solid #ddd; */
+    padding: 0.5rem;
+}
+
+#users tr:nth-child(even){background-color: whitesmoke;}
+#users tr:nth-child(odd){background-color: white;}
+#users tr td:last-child {
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+#users tr:hover {background-color: lightgrey;}
+
+#users th {
+    padding-top: 1rem;
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+    padding-bottom: .5rem;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.alert {
+  width: 50%;
+  margin-left: 25%;
+  max-width: 40rem;
+}
+
+.col-sm {
+  padding-top: 5rem;
+  position: fixed;
+}
+
+.table {
+    background-color: white;
+    border-radius: 2rem;
+}
+
+.content {
+    position: sticky;
+    margin: auto;
+    max-width: 25rem;
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 2rem;
+}
+/* Full-width input fields */
+input[type=text] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+  }
+
+.btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+  }
+  
+.btn:hover {
+  opacity: 1;
+}
+
+body, html {
+    height: 100%;
+  }
+  
+* {
+    box-sizing: border-box;
+}

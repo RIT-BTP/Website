@@ -1,0 +1,30 @@
+{% from "_formhelpers.html" import render_field %}
+{% extends 'unauth/base.html' %}
+
+{% block head %}
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Who's Registered</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" media="screen" href="static/register/register.css" />
+{% endblock %}
+
+{% block body %}
+<div class="background">
+        <a href={{url_for('home')}}>
+            <button class="btn">Home Page</button>
+         </a>
+    <div class="container">
+        <table id='users'>
+            <tr>
+                <th>User</th>
+            </tr>
+            {%for user in users%}
+            <tr>
+                <td>{{user}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
+</div>
+{% endblock %}

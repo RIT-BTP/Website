@@ -1,0 +1,38 @@
+{% from "_formhelpers.html" import render_field %}
+{% extends 'unauth/base.html' %}
+
+{% block head %}
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Login</title>
+<link rel="stylesheet" type="text/css" media="screen" href="static/auth/login.css" />
+<script src="static/auth/login.js"></script>
+{% endblock %}
+
+{% block body %}
+{%if failed_login%}
+<div class="alert alert-danger alert-dismissible fade show in" role="alert">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+</div>
+{%endif%}
+<div class="background">
+  <div class="col-sm">
+  </div>
+  <div class="col-sm">
+    <form method=post class="content">
+      <dl>
+        {{ render_field(form.username) }}
+        {{render_field(form.password)}}
+      </dl>
+      <p><input type=submit value=Login class="btn"></p>
+      <H5>No Account?</H5s>
+      <button id='register' class="btn" type="button" onclick="window.location.href='{{ url_for( 'register' ) }}';">Register</button>
+    </form>
+  </div>
+  <div class="col-sm">
+  </div>
+</div>
+{% endblock %}
