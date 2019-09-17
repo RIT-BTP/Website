@@ -12,8 +12,39 @@ body {
     position: relative;
 }
 
+body, html {
+    height: 100%;
+  }
+  
+* {
+    box-sizing: border-box;
+}
+
 .navbar {
     border-radius: 2rem;
     padding: 1rem;
     opacity: .9;
+    z-index: 2;
+    position: relative;
+}
+
+.background {
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    overflow-y: auto;
+    height: 100;
+    z-index: 1;
+}
+
+.event{
+    margin: auto;
+    max-width: 25rem;
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 1rem;
+}
+
+.card {
+    opacity: .95;
+    border-radius: 1rem;
 }

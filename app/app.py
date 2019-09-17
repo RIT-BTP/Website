@@ -1,6 +1,7 @@
 from flask import Flask, request, redirect, render_template, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 import os
+import base64
 
 app = Flask(__name__)
 
@@ -8,8 +9,8 @@ app.config.from_object(os.environ["APP_SETTINGS"])
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
-from models import tmpUsers
-from forms import RegistrationForm, LoginForm
+from models import tmpUsers, Events
+from forms import RegistrationForm, LoginForm, EventForm
 from functions import user_check
 
 
@@ -17,29 +18,33 @@ from functions import user_check
 def root():
     return redirect(url_for("login"))
 
-@app.route("/login", methods=['GET','POST'])
+
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    failed = request.args.get('failed')
+    failed = request.args.get("failed")
     form = LoginForm(request.form)
-    if request.method == 'POST' and form.validate():
+    if request.method == "POST" and form.validate():
         if not user_check(form.username.data):
-            return redirect(url_for('login', failed=True))
-        #check
+            return redirect(url_for("login", failed=True))
+        # check
         flash("Logged In")
         return redirect(url_for("home"))
-    return render_template('unauth/login/login.html', form=form, failed_login=failed)
+    return render_template("unauth/login/login.html", form=form, failed_login=failed)
+
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    failed = request.args.get('failed')
+    failed = request.args.get("failed")
     form = RegistrationForm(request.form)
     if request.method == "POST" and form.validate():
         if user_check(form.username.data):
-            return redirect(url_for('register', failed=True))
+            return redirect(url_for("register", failed=True))
         tmpUsers.insert(name=form.username.data)
         flash("Thanks for registering")
         return redirect(url_for("registeredlist"))
-    return render_template("unauth/register/register.html", form=form, failed_registration=failed)
+    return render_template(
+        "unauth/register/register.html", form=form, failed_registration=failed
+    )
 
 
 @app.route("/registeredlist", methods=["GET"])
@@ -49,6 +54,20 @@ def registeredlist():
     print(users)
     return render_template("unauth/register/list.html", users=users)
 
+
 @app.route("/home", methods=["GET"])
 def home():
-    return render_template("auth/home/home.html")
+    events = Events.get()
+    return render_template("auth/home/home.html", events=events)
+
+
+@app.route('/create event', methods=["GET", "POST"])
+def createEvent():
+    form = EventForm(request.form)
+    
+    if request.method == "POST" and form.validate():
+        Events.insert(name=form.name.data, icon=base64.b64encode(request.files[form.icon.name].read()), date=form.date.data, description=form.description.data)
+        return redirect(url_for("home"))
+    return render_template(
+        "auth/events/create.html", form=form
+    )

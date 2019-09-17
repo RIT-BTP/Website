@@ -1,0 +1,16 @@
+{% from "_formhelpers.html" import render_field %}
+{% extends 'unauth/base.html' %}
+
+{% block body %}
+<form method=post class="content" enctype="multipart/form-data">
+    <dl>
+        {{ render_field(form.name) }}
+        {{ render_field(form.icon) }}
+        {{ render_field(form.date) }}
+        {{ render_field(form.description) }}
+        {{ render_field(form.star) }}
+    </dl>
+    <p><input type=submit value=Register class="btn">
+</form>
+
+{% endblock %}

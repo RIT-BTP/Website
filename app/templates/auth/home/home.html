@@ -11,11 +11,51 @@
 
 {% block body %}
 <div class="background">
-    <div class="col-sm">
-    </div>
-    <div class="col-sm">
-    </div>
-    <div class="col-sm">
+    <div class="container">
+        <div class="row">
+            <div class="container">
+                {% for event in events %}
+                <div class="card">
+                    <div class="row no-gutters">
+                        <div class="col-auto">
+                            <img src="data:image/png;base64, {{event.icon.decode('utf-8')}}" width="200" height="200" class="img-fluid"
+                                style="border-top-left-radius: 1rem;" alt="">
+                        </div>
+                        <div class="col">
+                            <div class="card-block px-2">
+                                <h4 class="card-title">{{event.name}}</h4>
+                                <p class="card-text">{{event.description}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer w-100 text-muted">
+                        When: {{event.date}}
+                    </div>
+                </div>
+                <br>
+                {%endfor%}
+                <div class="card">
+                    <div class="row no-gutters">
+                        <div class="col-auto">
+                            <img src="../../../static/saunders.jpg" width="200" height="200" class="img-fluid"
+                                style="border-top-left-radius: 1rem;" alt="">
+                        </div>
+                        <div class="col">
+                            <div class="card-block px-2">
+                                <h4 class="card-title">Saunders Picnic</h4>
+                                <p class="card-text">Join your fellow Saunders College of Business students, faculty,
+                                    and staff. Enjoy free food, snag a free T-shirt, mix and mingle with members of
+                                    Saunders student clubs and so many more activities that you will not want to miss!
+                                    Be sure to bring your student ID to take part in the festivities. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer w-100 text-muted">
+                        When: 9/19/2019
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
