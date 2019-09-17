@@ -17,7 +17,7 @@ from functions import user_check
 
 @app.route("/")
 def root():
-    return redirect(url_for("login"))
+    return redirect(url_for("home"))
 
 
 @app.route("/login", methods=["GET", "POST"])
