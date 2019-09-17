@@ -106,3 +106,7 @@ venv.bak/
 
 # vscode
 .vscode/
+
+../nohup.out
+../website.out
+../website.err

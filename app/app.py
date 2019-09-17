@@ -2,6 +2,7 @@ from flask import Flask, request, redirect, render_template, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 import os
 import base64
+import datetime
 
 app = Flask(__name__)
 
@@ -58,6 +59,8 @@ def registeredlist():
 @app.route("/home", methods=["GET"])
 def home():
     events = Events.get()
+    events = [event for event in events]
+    events = sorted(events, key=lambda x: x.date)
     return render_template("auth/home/home.html", events=events)
 
 
