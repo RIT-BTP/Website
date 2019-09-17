@@ -58,10 +58,13 @@ def registeredlist():
 
 @app.route("/home", methods=["GET"])
 def home():
-    events = Events.get()
-    events = [event for event in events]
-    events = sorted(events, key=lambda x: x.date)
-    return render_template("auth/home/home.html", events=events)
+    all_events = Events.get()
+    curr_events = []
+    for event in all_events:
+        if event.date >= datetime.date.today():
+            curr_events.append(event)
+    curr_events = sorted(curr_events, key=lambda x: x.date)
+    return render_template("auth/home/home.html", events=curr_events)
 
 
 @app.route('/create event', methods=["GET", "POST"])
