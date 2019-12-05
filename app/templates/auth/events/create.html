@@ -2,28 +2,42 @@
 {% extends 'auth/base.html' %}
 
 {% block head %}
-<link rel="stylesheet" type="text/css" media="screen" href="static/event/event.css" />
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Login</title>
+<link rel="stylesheet" type="text/css" media="screen" href="static/auth/events/create.css" />
+//<script src="static/auth/login.js"></script>//
 {% endblock %}
 
 {% block body %}
+{%if failed_login%}
+<div class="alert alert-danger alert-dismissible fade show in" role="alert">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+</div>
+{%endif%}
 <div class="background">
-    <div class="col-sm">
-    </div>
-    <div class="col-sm">
-        <form method=post class="content" enctype="multipart/form-data">
-            <dl>
-                {{ render_field(form.name) }}
-                {{ render_field(form.icon) }}
-                {{ render_field(form.date) }}
-                {{ render_field(form.description) }}
-                {{ render_field(form.time) }}
-                {{ render_field(form.location) }}
-                {{ render_field(form.star) }}
-            </dl>
-            <p><input type=submit value="Create Event" class="btn">
-        </form>
-    </div>
-    <div class="col-sm">
-    </div>
+  <div class="col-sm">
+  </div>
+  <div class="col-sm">
+    <form method=post class="content">
+      <dl>
+        {{ render_field(form.name) }}
+        {{ render_field(form.icon) }}
+        {{ render_field(form.date) }}
+        {{ render_field(form.description) }}
+        {{ render_field(form.star) }}
+        {{ render_field(form.date)}}
+        {{ render_field(form.name)}}
+      </dl>
+      <p>
+        <input type=submit value=Register class="btn">
+      <button id='register' class="btn" type=submit>Create Event</button>
+    </form>
+  </div>
+  <div class="col-sm">
+  </div>
 </div>
 {% endblock %}
