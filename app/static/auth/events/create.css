@@ -1,6 +1,6 @@
 body {
     padding-top: 1rem;
-    background-image: url(../saunders.jpg);
+    background-image: url(/app/static/69670963_10156337089062517_551192476153544704_o.jpg);
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -20,7 +20,7 @@ body {
 .btn {
     background-color: #4CAF50;
     color: white;
-    padding: 12px 16px;
+    padding: 16px 20px;
     border: none;
     cursor: pointer;
     width: 100%;
