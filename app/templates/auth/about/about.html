@@ -1,0 +1,45 @@
+{% from "_formhelpers.html" import render_field %}
+{% extends 'auth/base.html' %}
+
+{% block head %}
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Home</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" media="screen" href="static/home/home.css" />
+{% endblock %}
+
+{% block body %}
+<div class="background">
+    <div class="container">
+        <div class="row">
+            <div class="container">
+                {% for leader in leaders %}
+                <div class="card">
+                    <div class="row no-gutters">
+                        <div class="col-auto">
+                            <img src="data:image/png;base64, {{leader.icon.decode('utf-8')}}" class="img"
+                                style="border-top-left-radius: 1rem;" alt="">
+                        </div>
+                        <div class="col">
+                            <div class="card-block px-2">
+                                <h4 class="card-title">{{leader.name}}</h4>
+                                <p class="card-text">{{leader.description}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer w-100 text-muted">
+                        Position: {{leader.position}}
+                        <br>
+                        Major: {{leader.major}}
+                        <br>
+                        Year: {{leader.year}}
+                    </div>
+                </div>
+                <br>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

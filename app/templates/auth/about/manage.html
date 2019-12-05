@@ -1,0 +1,46 @@
+{% from "_formhelpers.html" import render_field %}
+{% extends 'auth/base.html' %}
+
+{% block head %}
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Home</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" media="screen" href="static/home/home.css" />
+{% endblock %}
+
+{% block body %}
+<div class="background">
+    <div class="container">
+        <div class="row">
+            <form>
+                <div class="container">
+                    {% for leader in leaders %}
+                    <div class="card">
+                        <div class="row no-gutters">
+                            {% if leader.active %}
+                            <div class="col-auto">
+                                <input type="checkbox" value="Active" checked>Active<br>
+                            </div>
+                            {% else %}
+                            <div class="col-auto">
+                                <input type="checkbox" value="Active">Active<br>
+                            </div>
+                            {% endif %}
+                            <div class="col">
+                                <div class="card-block px-2">
+                                    <h4 class="card-title">{{leader.name}}</h4>
+                                    <p class="card-text">{{leader.description}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    {%endfor%}
+                </div>
+                <input type=submit value="Update Leadership" class="btn">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

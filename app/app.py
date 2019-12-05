@@ -10,8 +10,8 @@ app.config.from_object(os.environ["APP_SETTINGS"])
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
-from models import tmpUsers, Events
-from forms import RegistrationForm, LoginForm, EventForm
+from models import tmpUsers, Events, Leadership
+from forms import RegistrationForm, LoginForm, EventForm, LeadershipForm, ManageLeadershipForm
 from functions import user_check
 
 
@@ -59,21 +59,67 @@ def registeredlist():
 @app.route("/home", methods=["GET"])
 def home():
     all_events = Events.get()
-    curr_events = []
+    starred = []
+    not_starred = []
     for event in all_events:
         if event.date >= datetime.date.today():
-            curr_events.append(event)
-    curr_events = sorted(curr_events, key=lambda x: x.date)
-    return render_template("auth/home/home.html", events=curr_events)
+            if event.starred:
+                starred.append(event)
+            else:
+                not_starred.append(event)
+    starred = sorted(starred, key=lambda x: x.date)
+    not_starred = sorted(not_starred, key=lambda x: x.date)
+    return render_template("auth/home/home.html", starred=starred, events=not_starred)
 
 
-@app.route('/create event', methods=["GET", "POST"])
+@app.route("/create event", methods=["GET", "POST"])
 def createEvent():
     form = EventForm(request.form)
-    
+
     if request.method == "POST" and form.validate():
-        Events.insert(name=form.name.data, icon=base64.b64encode(request.files[form.icon.name].read()), date=form.date.data, description=form.description.data)
+        Events.insert(
+            name=form.name.data,
+            icon=base64.b64encode(request.files[form.icon.name].read()),
+            date=form.date.data,
+            description=form.description.data,
+            location=form.location.data,
+            starred=form.star.data,
+            time=form.time.data,
+        )
         return redirect(url_for("home"))
-    return render_template(
-        "auth/events/create.html", form=form
-    )
+    return render_template("auth/events/create.html", form=form)
+
+
+@app.route("/about")
+def about():
+    leaders = Leadership.get(active=True)
+    return render_template("auth/about/about.html", leaders=leaders)
+
+
+@app.route("/leadership", methods=["GET", "POST"])
+def add_leadership():
+    form = LeadershipForm(request.form)
+
+    if request.method == "POST" and form.validate():
+        Leadership.insert(
+            name=form.name.data,
+            icon=base64.b64encode(request.files[form.icon.name].read()),
+            position=form.position.data,
+            description=form.description.data,
+            major=form.major.data,
+            year=form.year.data,
+            active=True,
+        )
+        return redirect(url_for("about"))
+    return render_template("auth/leadership/create.html", form=form)
+
+
+@app.route("/manage-leadership", methods=["GET", "POST"])
+def manage_leadership():
+    leaders = Leadership.get()
+    return render_template("auth/about/manage.html", leaders=leaders)
+
+
+@app.route("/projects")
+def project():
+    return render_template("auth/projects.html")

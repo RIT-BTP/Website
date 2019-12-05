@@ -36,13 +36,6 @@ body, html {
     z-index: 1;
 }
 
-.event{
-    margin: auto;
-    max-width: 25rem;
-    padding: 1.5rem;
-    background-color: white;
-    border-radius: 1rem;
-}
 
 .card {
     opacity: .95;
@@ -54,3 +47,10 @@ body, html {
     max-width: 10rem;
     height: auto;
 }
+
+
+.container{
+    font-size: 2rem;
+    background-color: red;
+}
+

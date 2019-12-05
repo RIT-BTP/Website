@@ -14,11 +14,12 @@
     <div class="container">
         <div class="row">
             <div class="container">
-                {% for event in events %}
+                <div style="background-color: tomato; border-radius: 1rem; text-align: center">Starred</div>
+                {% for event in starred %}
                 <div class="card">
                     <div class="row no-gutters">
                         <div class="col-auto">
-                            <img src="data:image/png;base64, {{event.icon.decode('utf-8')}}" width="200" height="200" class="img-fluid"
+                            <img src="data:image/png;base64, {{event.icon.decode('utf-8')}}" class="img"
                                 style="border-top-left-radius: 1rem;" alt="">
                         </div>
                         <div class="col">
@@ -29,13 +30,40 @@
                         </div>
                     </div>
                     <div class="card-footer w-100 text-muted">
-                        When: {{event.date}}
+                        When: {{event.date}}; {{event.time}}
+                        <br>
+                        Location: {{event.location}}
                     </div>
                 </div>
                 <br>
                 {%endfor%}
             </div>
         </div>
+        <div class="container">
+            {% for event in events %}
+            <div class="card">
+                <div class="row no-gutters">
+                    <div class="col-auto">
+                        <img src="data:image/png;base64, {{event.icon.decode('utf-8')}}" class="img"
+                            style="border-top-left-radius: 1rem;" alt="">
+                    </div>
+                    <div class="col">
+                        <div class="card-block px-2">
+                            <h4 class="card-title">{{event.name}}</h4>
+                            <p class="card-text">{{event.description}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer w-100 text-muted">
+                    When: {{event.date}}; {{event.time}}
+                    <br>
+                    Location: {{event.location}}
+                </div>
+            </div>
+            <br>
+            {%endfor%}
+        </div>
     </div>
+</div>
 </div>
 {% endblock %}
